@@ -40,6 +40,14 @@ h2 {
     gap: 20px;
 }
 
+.buscador{
+    border-style: solid;
+    border-radius: 8px;
+    border-color: #753a92;
+    padding: 5px;
+    margin: 5px;
+}
+
 .product {
     background-color: rgb(236, 217, 245, 0.829);
     padding: 15px;
