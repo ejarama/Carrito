@@ -1,12 +1,12 @@
 // Lista de productos (puedes modificarla o consumir una API)
 const products = [
     { id: 1, name: "ET0045 - PENSAMIENTO CREATIVO", price: 300000 },
-    { id: 2, name: "ET0112 - MATEMÁTICAS DISCRETAS", price: 340000},
-    { id: 3, name: "ET0120 - GESTIÓN EMPRESARIAL", price: 320000 },
-    { id: 4, name: "ET0117 - MATEMÁTICAS OPERATIVAS", price: 400000 },
-    { id: 5, name: "FB0003 - DESARROLLO HUMANO Y SOCIAL", price: 260000},
-    { id: 6, name: "FB0001 - CÁLCULO DIFERENCIAL", price: 420000 },
-    { id: 7, name: "ET0047 - ÉTICA Y PROPIEDAD INTELECTUAL", price: 240000 },
+    { id: 2, name: "ET0112 - MATEMATICAS DISCRETAS", price: 340000},
+    { id: 3, name: "ET0120 - GESTION EMPRESARIAL", price: 320000 },
+    { id: 4, name: "ET0117 - MATEMATICAS OPERATIVAS", price: 400000 },
+    { id: 5, name: "FB0003 - DESAROLLO HUMANO Y SOCIAL", price: 260000},
+    { id: 6, name: "FB0001 - CALCULO DIFERENCIAL", price: 420000 },
+    { id: 7, name: "ET0047 - ETICA Y PROPIEDAD INTELECTUAL", price: 240000 },
     { id: 8, name: "ET0122 - MERCADEO", price: 380000 },
     { id: 9, name: "FB0004 - LENGUA MATERNA", price: 230000},
     { id: 10, name: "FB0029 - GESTION AMBIENTAL", price: 2000000 },
@@ -16,6 +16,7 @@ const products = [
     { id: 14, name: "ET0121 - TRABAJO DE GRADO", price: 860000 }        
   ]; 
 
+  let products1 = products 
 // Carrito
 let cart = [];
 
@@ -23,7 +24,7 @@ let cart = [];
 function renderProducts() {
     const productsContainer = document.getElementById("products");
     productsContainer.innerHTML = "";
-    products.forEach(product => {
+    products1.forEach(product => {
         const productElement = document.createElement("div");
         productElement.classList.add("product");
         productElement.innerHTML = `            
@@ -88,7 +89,7 @@ function renderCart() {
                 <span class="quantity">${item.quantity}</span>
                 <button class="add_button" onclick="addToCart(${item.id})">+</button>
                 <button class="remove_button" onclick="removeFromCart(${item.id})">
-                    <img src="iconos/papelera-xmark.png" alt="Eliminar">
+                    <img src="iconos/papelera-xmark.png" alt="Eliminar">                    
                 </button>
             </div>
         `;
@@ -115,6 +116,15 @@ function renderCart() {
 function removeFromCart(productId) {
     cart = cart.filter(item => item.id !== productId);
     renderCart();
+}
+
+//Función para buscar 
+
+function buscador(){
+    const busqueda = document.getElementById("buscar").value.toLowerCase();
+    const filtrados = products.filter(item => item.name.toLowerCase().includes(busqueda));
+    products1 = filtrados;
+    renderProducts()
 }
 
 // Evento para finalizar compra

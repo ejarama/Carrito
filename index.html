@@ -13,12 +13,14 @@
     </header>
 
     <main>
-        <!-- Lista de productos -->
         <section id="product-list">
-            <h2>Productos</h2>
-            <div class="buscador">BUSCAR</div>
-            <div id="products" class="products-container"></div>
-        </section>
+    <div class="products-header">
+        <h2>Productos</h2>
+        <input id="buscar" oninput="buscador()" class="buscador" placeholder="Buscar producto...">
+    </div>
+    <div id="products" class="products-container"></div>
+</section>
+        
 
         <!-- Carrito de compras -->
         <section id="cart">
