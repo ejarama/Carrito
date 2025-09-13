@@ -101,17 +101,38 @@ h2 {
     border-bottom: 1px solid #4d0257;
 }
 
-.cart-item button {
-    background-color: #dc3545;
-    color: white;
+.less_button {
+    background-color: #f7f7f7;
+    color: #753a92;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.add_button {
+    background-color: #f7f7f7;
+    color: #753a92;
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
 }
 
+.remove_button {
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.quantity{
+    border-style: solid;
+    border-radius: 8px;
+    border-color: #753a92;
+    padding: 2px 5px;
+}
+
 .cart-item button:hover {
-    background-color: #c82333;
+    background-color: #cdb1ce;
 }
 
 #cart-total {

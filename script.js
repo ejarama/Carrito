@@ -51,6 +51,19 @@ function addToCart(productId) {
 
     renderCart();
 }
+// Función para restar un producto al carrito
+function lessToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    const cartItem = cart.find(item => item.id === productId);
+    if (cartItem.quantity == 1){
+        removeFromCart(productId)
+    }
+    if (cartItem) {
+        cartItem.quantity--;
+    } 
+
+    renderCart();
+}
 
 // Función para renderizar el carrito
 function renderCart() {
@@ -63,13 +76,16 @@ function renderCart() {
         const cartItemElement = document.createElement("div");
         cartItemElement.classList.add("cart-item");
         cartItemElement.innerHTML = `
-            <span>${item.name} (x${item.quantity})</span>
+            <span>${item.name}</span>
             <span>$${(item.price * item.quantity).toLocaleString("es-CO", {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-    })}</span>
-
-            <button onclick="removeFromCart(${item.id})">Eliminar</button>
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+                })} 
+            </span>
+            <button class = "less_button" onclick="lessToCart(${item.id})">-</button>
+            <span class = "quantity">${item.quantity}</span>
+            <button class = "add_button" onclick="addToCart(${item.id})">+</button>
+            <button class = "remove_button" onclick="removeFromCart(${item.id})"><img src="iconos/papelera-xmark.png" alt=""></button>
         `;
         cartItemsContainer.appendChild(cartItemElement);
     });
