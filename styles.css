@@ -94,11 +94,35 @@ h2 {
 }
 
 .cart-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #4d0257;
+  display: flex;
+  justify-content: space-between; /* izquierda vs derecha */
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column; 
+  max-width: 70%;         
+  overflow-wrap: break-word; 
+}
+
+.item-name {
+  font-weight: bold;
+}
+
+.item-price {
+  color: #333;
+  font-size: 0.9em;
+  margin-top: 2px;
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
 }
 
 .less_button {
@@ -140,6 +164,7 @@ h2 {
     text-align: right;
 }
 
+
 #checkout-btn {
     background-color: #4a2a53;
     color: white;
@@ -147,8 +172,67 @@ h2 {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 20px;
 }
 
 #checkout-btn:hover {
     background-color: #753a92;
+}
+
+#contextMenu{
+    position: absolute;
+    display: none;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    z-index: 1000;
+    border-radius: 6px;
+    min-width: 160px;
+    font-family: Arial, sans-serif;
+}
+
+#contextMenu ul{
+    list-style:none;
+    margin:0; 
+    padding:5px 0;
+}
+
+#contextMenu ul li{
+    padding:8px 15px;
+    cursor:pointer;
+}
+#contextMenu li:hover {
+  background: #f5f5f5;
+}
+
+@media (max-width: 768px) {
+  main {
+    flex-direction: column;
+  }
+
+  section {
+    width: 100%;
+  }
+
+  
+  #cart-items {
+    margin-top: 15px;
+    width: 100%;
+  }
+
+
+  .cart-item {
+    flex-direction: column; 
+    align-items: flex-start;
+    gap: 5px;
+  }
+
+  .item-info {
+    max-width: 100%; 
+  }
+
+  
+  .item-actions {
+    align-self: flex-end;  
+  }
 }

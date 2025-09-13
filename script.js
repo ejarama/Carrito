@@ -76,17 +76,31 @@ function renderCart() {
         const cartItemElement = document.createElement("div");
         cartItemElement.classList.add("cart-item");
         cartItemElement.innerHTML = `
-            <span>${item.name}</span>
-            <span>$${(item.price * item.quantity).toLocaleString("es-CO", {
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
-                })} 
-            </span>
-            <button class = "less_button" onclick="lessToCart(${item.id})">-</button>
-            <span class = "quantity">${item.quantity}</span>
-            <button class = "add_button" onclick="addToCart(${item.id})">+</button>
-            <button class = "remove_button" onclick="removeFromCart(${item.id})"><img src="iconos/papelera-xmark.png" alt=""></button>
+              <div class="item-info">
+                    <span class="item-name">${item.name}</span>
+                    <span class="item-price">$${(item.price * item.quantity).toLocaleString("es-CO", {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    })}</span>
+               </div>
+            <div class="item-actions">
+                <button class="less_button" onclick="lessToCart(${item.id})">-</button>
+                <span class="quantity">${item.quantity}</span>
+                <button class="add_button" onclick="addToCart(${item.id})">+</button>
+                <button class="remove_button" onclick="removeFromCart(${item.id})">
+                    <img src="iconos/papelera-xmark.png" alt="Eliminar">
+                </button>
+            </div>
         `;
+        cartItemElement.addEventListener("contextmenu", (e) => {
+        e.preventDefault();
+        currentItemId = item.id;
+
+        const menu = document.getElementById("contextMenu");
+        menu.style.top = e.pageY + "px";
+        menu.style.left = e.pageX + "px";
+        menu.style.display = "block";     
+      });
         cartItemsContainer.appendChild(cartItemElement);
     });
 
@@ -113,6 +127,33 @@ document.getElementById("checkout-btn").addEventListener("click", () => {
         renderCart();
     }
 });
+
+// Cerrar menú contextual al hacer clic fuera
+  document.addEventListener("click", () => {
+    document.getElementById("contextMenu").style.display = "none";
+  });
+
+// Opción Eliminar
+  document.getElementById("menu-eliminar").addEventListener("click", () => {
+    if (currentItemId !== null) {
+      removeFromCart(currentItemId);
+      document.getElementById("contextMenu").style.display = "none";
+    }
+  });
+
+  // Opción Cambiar cantidad
+  document.getElementById("menu-cambiar").addEventListener("click", () => {
+    if (currentItemId !== null) {
+      const newQty = parseInt(prompt("Ingrese nueva cantidad:"), 10);
+      if (!isNaN(newQty) && newQty > 0) {
+        const item = cart.find(i => i.id === currentItemId);
+        if (item) item.quantity = newQty;
+        renderCart();
+      }
+      document.getElementById("contextMenu").style.display = "none";
+    }
+  });
+
 
 // Inicializar la página
 renderProducts();
